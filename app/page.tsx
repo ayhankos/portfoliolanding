@@ -5,8 +5,6 @@ import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
 import { Experience } from "@/components/Experience";
 import { Skills } from "@/components/Skills";
-import { Portfolio } from "@/components/Portfolio";
-import { Achievements } from "@/components/Achievements";
 import { Contact } from "@/components/Contact";
 import { Navigation } from "@/components/Navigation";
 import { ScrollToTop } from "@/components/ScrollToTop";
@@ -65,14 +63,6 @@ export default function Home() {
         <section id="skills">
           <Skills />
         </section>
-
-        {/*  <section id="portfolio">
-          <Portfolio />
-        </section>
-        
-        <section id="achievements">
-          <Achievements />
-        </section> */}
 
         <section id="contact">
           <Contact />

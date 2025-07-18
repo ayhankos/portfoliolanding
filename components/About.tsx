@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -17,24 +17,24 @@ import {
 } from "lucide-react";
 
 export function About() {
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         duration: 0.8,
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
-    }
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
   };
 
   const highlights = [
@@ -47,8 +47,9 @@ export function About() {
     },
     {
       icon: Palette,
-      title: "UI/UX Design",
-      description: "Kullanıcı odaklı, estetik ve fonksiyonel tasarımlar",
+      title: "Proje Kurulumu",
+      description:
+        "Sadece proje geliştirme değil deployment süreçlerini de yönetebilme becerisi",
       color: "from-purple-500 to-pink-500",
       bgColor: "bg-purple-500/10",
     },
@@ -62,32 +63,53 @@ export function About() {
     {
       icon: Users,
       title: "Team Collaboration",
-      description: "Agile metodoloji ile etkili takım çalışması",
+      description: "Birçok farklı ekip ile uyum içinde çalışma tecrübesi",
       color: "from-green-500 to-emerald-500",
       bgColor: "bg-green-500/10",
     },
   ];
 
   const stats = [
-    { icon: Star, number: "3+", label: "Yıl Deneyim", color: "text-yellow-400" },
-    { icon: Award, number: "25+", label: "Tamamlanan Proje", color: "text-blue-400" },
-    { icon: Target, number: "100%", label: "Müşteri Memnuniyeti", color: "text-green-400" },
-    { icon: Lightbulb, number: "∞", label: "Öğrenme Modu", color: "text-purple-400" },
+    {
+      icon: Star,
+      number: "2+",
+      label: "Yıl Deneyim",
+      color: "text-yellow-400",
+    },
+    {
+      icon: Award,
+      number: "25+",
+      label: "Tamamlanan Proje",
+      color: "text-blue-400",
+    },
+    {
+      icon: Target,
+      number: "100%",
+      label: "Müşteri Memnuniyeti",
+      color: "text-green-400",
+    },
+    {
+      icon: Lightbulb,
+      number: "∞",
+      label: "Öğrenme Modu",
+      color: "text-purple-400",
+    },
   ];
 
   const technologies = [
     { name: "React", category: "Frontend" },
     { name: "Next.js", category: "Framework" },
-    { name: "TypeScript", category: "Language" },
     { name: "Node.js", category: "Backend" },
-    { name: "PostgreSQL", category: "Database" },
-    { name: "MongoDB", category: "Database" },
-    { name: "AWS", category: "Cloud" },
-    { name: "Docker", category: "DevOps" },
-    { name: "GraphQL", category: "API" },
-    { name: "Redis", category: "Cache" },
+    { name: "TypeScript", category: "Language" },
     { name: "Tailwind CSS", category: "Styling" },
     { name: "Prisma", category: "ORM" },
+    { name: "PostgreSQL", category: "Database" },
+    { name: "MongoDB", category: "Database" },
+    { name: "React Native", category: "Mobile" },
+    { name: "Debian", category: "Operating System" },
+    { name: "Linux", category: "Operating System" },
+    { name: "PM2", category: "Process Manager" },
+    { name: "Nginx", category: "Web Server" },
   ];
 
   return (
@@ -97,29 +119,29 @@ export function About() {
     >
       {/* Animated background elements */}
       <div className="absolute inset-0">
-        <motion.div 
+        <motion.div
           className="absolute top-40 left-20 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3]
+            opacity: [0.3, 0.6, 0.3],
           }}
           transition={{
             duration: 4,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         />
-        <motion.div 
+        <motion.div
           className="absolute bottom-40 right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"
           animate={{
             scale: [1.2, 1, 1.2],
-            opacity: [0.4, 0.7, 0.4]
+            opacity: [0.4, 0.7, 0.4],
           }}
           transition={{
             duration: 5,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: 1
+            delay: 1,
           }}
         />
 
@@ -134,13 +156,13 @@ export function About() {
             }}
             animate={{
               y: [-20, 20, -20],
-              opacity: [0.2, 0.8, 0.2]
+              opacity: [0.2, 0.8, 0.2],
             }}
             transition={{
               duration: 3 + Math.random() * 4,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: Math.random() * 5
+              delay: Math.random() * 5,
             }}
           />
         ))}
@@ -158,7 +180,7 @@ export function About() {
         >
           {/* Header */}
           <motion.div className="text-center mb-16" variants={itemVariants}>
-            <motion.h2 
+            <motion.h2
               className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
@@ -166,21 +188,24 @@ export function About() {
               Hakkımda
             </motion.h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Teknoloji tutkusu ile modern web çözümleri geliştiren, 
-              sürekli öğrenmeye odaklı bir yazılım geliştirici.
+              Modern full-stack web projeleri geliştiren, sürekli öğrenmeye ve
+              kendini geliştirmeye odaklı bir yazılım geliştirici.
             </p>
           </motion.div>
 
           {/* Stats Cards */}
-          <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16" variants={itemVariants}>
+          <motion.div
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16"
+            variants={itemVariants}
+          >
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
                 className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 shadow-lg text-center group"
-                whileHover={{ 
-                  scale: 1.05, 
+                whileHover={{
+                  scale: 1.05,
                   backgroundColor: "rgba(255, 255, 255, 0.1)",
-                  borderColor: "rgba(255, 255, 255, 0.2)"
+                  borderColor: "rgba(255, 255, 255, 0.2)",
                 }}
                 transition={{ duration: 0.3 }}
               >
@@ -190,7 +215,7 @@ export function About() {
                 >
                   <stat.icon className={`h-8 w-8 ${stat.color} mx-auto mb-3`} />
                 </motion.div>
-                <motion.div 
+                <motion.div
                   className="text-2xl font-bold text-white mb-1"
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
@@ -216,25 +241,28 @@ export function About() {
                   <Brain className="h-8 w-8 text-blue-400 mr-3" />
                   <h3 className="text-2xl font-semibold text-white">Hikayem</h3>
                 </motion.div>
-                
+
                 <div className="space-y-4 text-gray-300 leading-relaxed">
                   <p>
-                    Web geliştirme yolculuğuma merak ile başladım. Zamanla bu merak, 
-                    gerçek dünya problemlerini çözen dijital deneyimler yaratma tutkusuna dönüştü.
+                    Web geliştirme yolculuğuma merak ile başladım. Zamanla bu
+                    merak, gerçek dünya problemlerini çözen dijital deneyimler
+                    yaratma tutkusuna dönüştü.
                   </p>
                   <p>
-                    Teknik uzmanlığı yaratıcı problem çözme ile birleştiren yaklaşımım, 
-                    her zaman kullanıcı deneyimini ve performansı ön planda tutar.
+                    Teknik uzmanlığı yaratıcı problem çözme ile birleştiren
+                    yaklaşımım, her zaman kullanıcı deneyimini ve performansı ön
+                    planda tutar.
                   </p>
                   <p>
-                    Kod yazmadığım zamanlarda yeni teknolojileri keşfediyor, 
-                    açık kaynak projelere katkıda bulunuyor ve diğer geliştiricilere mentorluk yapıyorum.
+                    Kod yazmadığım zamanlarda yeni teknolojileri keşfediyor,
+                    açık kaynak projelere katkıda bulunuyor ve diğer
+                    geliştiricilere mentorluk yapıyorum.
                   </p>
                 </div>
 
                 {/* Technologies */}
                 <div className="mt-8">
-                  <motion.h4 
+                  <motion.h4
                     className="font-semibold text-white mb-4 flex items-center"
                     whileHover={{ x: 5 }}
                   >
@@ -252,7 +280,9 @@ export function About() {
                       >
                         <Badge className="w-full justify-center px-3 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 border border-blue-400/30 hover:from-blue-500/30 hover:to-purple-500/30 transition-all duration-200">
                           <span className="font-medium">{tech.name}</span>
-                          <span className="ml-2 text-xs opacity-70">{tech.category}</span>
+                          <span className="ml-2 text-xs opacity-70">
+                            {tech.category}
+                          </span>
                         </Badge>
                       </motion.div>
                     ))}
@@ -267,10 +297,10 @@ export function About() {
                 {highlights.map((highlight, index) => (
                   <motion.div
                     key={index}
-                    whileHover={{ 
-                      scale: 1.05, 
+                    whileHover={{
+                      scale: 1.05,
                       rotateY: 5,
-                      rotateX: 5 
+                      rotateX: 5,
                     }}
                     transition={{ duration: 0.3 }}
                   >
@@ -296,15 +326,15 @@ export function About() {
               </div>
 
               {/* Current Focus */}
-              <motion.div 
+              <motion.div
                 className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-md rounded-xl p-6 border border-white/10"
-                whileHover={{ 
+                whileHover={{
                   backgroundColor: "rgba(99, 102, 241, 0.1)",
-                  borderColor: "rgba(99, 102, 241, 0.3)"
+                  borderColor: "rgba(99, 102, 241, 0.3)",
                 }}
                 transition={{ duration: 0.3 }}
               >
-                <motion.h4 
+                <motion.h4
                   className="font-semibold text-white mb-3 flex items-center"
                   whileHover={{ x: 5 }}
                 >
@@ -312,8 +342,12 @@ export function About() {
                   Şu Anki Odağım
                 </motion.h4>
                 <p className="text-gray-300 text-sm leading-relaxed">
-                  Cloud-native uygulamalar, mikroservis mimarisi ve AI destekli web çözümleri 
-                  üzerinde çalışıyorum. Web3 ve blockchain teknolojilerini de aktif olarak araştırıyorum.
+                  Odak alanlarım arasında SEO optimizasyonlu web uygulamaları
+                  geliştirmek, modern frontend teknolojileri ile kullanıcı
+                  deneyimini en üst düzeye çıkarmak ve güçlü backend sistemleri
+                  tasarlamak yer alıyor. Full-stack geliştirici olarak,
+                  performans odaklı ve ölçeklenebilir çözümler üretmeyi
+                  hedefliyorum.
                 </p>
               </motion.div>
             </motion.div>
