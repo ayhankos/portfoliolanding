@@ -230,7 +230,7 @@ export function Skills() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           {/* Header */}
           <motion.div className="text-center mb-16" variants={itemVariants}>
