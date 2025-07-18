@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -10,102 +10,152 @@ import {
   TrendingUp,
   Award,
   Users,
+  Code2,
+  Zap,
+  Target,
 } from "lucide-react";
 
 export function Experience() {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        staggerChildren: 0.2
+      }
     }
+  };
 
-    return () => observer.disconnect();
-  }, []);
+  const itemVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
 
   const experiences = [
     {
       company: "TechCorp Solutions",
       position: "Senior Full Stack Developer",
-      location: "San Francisco, CA",
-      period: "2022 - Present",
+      location: "İstanbul, Türkiye",
+      period: "2022 - Günümüz",
       description:
-        "Led development of enterprise-scale web applications using React, Node.js, and AWS. Managed a team of 5 developers and improved application performance by 40%.",
-      technologies: ["React", "Node.js", "AWS", "PostgreSQL", "Docker"],
+        "React, Node.js ve AWS kullanarak kurumsal ölçekli web uygulamaları geliştirdim. 5 kişilik geliştirici ekibini yönettim ve uygulama performansını %40 artırdım.",
+      technologies: ["React", "Node.js", "AWS", "PostgreSQL", "Docker", "TypeScript"],
       achievements: [
-        "Reduced page load times by 40% through optimization",
-        "Led migration to microservices architecture",
-        "Mentored 5 junior developers",
+        "Sayfa yükleme sürelerini %40 azalttım",
+        "Mikroservis mimarisine geçiş liderliği",
+        "5 junior geliştiriciye mentorluk",
+        "CI/CD pipeline kurulumu ve optimizasyonu",
       ],
       icon: TrendingUp,
       gradient: "from-blue-500 to-cyan-500",
+      bgGradient: "from-blue-500/10 to-cyan-500/10",
     },
     {
       company: "StartupXYZ",
       position: "Full Stack Developer",
-      location: "New York, NY",
-      period: "2020 - 2022",
+      location: "Ankara, Türkiye",
+      period: "2021 - 2022",
       description:
-        "Developed and maintained multiple client projects using modern web technologies. Collaborated with design teams to create responsive, user-friendly interfaces.",
-      technologies: ["Vue.js", "Express.js", "MongoDB", "GraphQL"],
+        "Modern web teknolojileri kullanarak çoklu müşteri projeleri geliştirdim. Tasarım ekipleri ile işbirliği yaparak responsive ve kullanıcı dostu arayüzler oluşturdum.",
+      technologies: ["Vue.js", "Express.js", "MongoDB", "GraphQL", "Docker"],
       achievements: [
-        "Built 15+ client projects from scratch",
-        "Implemented automated testing reducing bugs by 60%",
-        "Collaborated with cross-functional teams",
+        "15+ müşteri projesini sıfırdan geliştirdim",
+        "Otomatik test implementasyonu ile hata oranını %60 azalttım",
+        "Cross-functional takımlarla başarılı işbirlikleri",
+        "Agile metodoloji ile proje yönetimi",
       ],
       icon: Award,
       gradient: "from-purple-500 to-pink-500",
+      bgGradient: "from-purple-500/10 to-pink-500/10",
     },
     {
       company: "WebDesign Studio",
       position: "Junior Developer",
-      location: "Los Angeles, CA",
-      period: "2019 - 2020",
+      location: "İzmir, Türkiye",
+      period: "2020 - 2021",
       description:
-        "Started my professional journey building responsive websites and learning modern development practices. Focused on front-end development and UI/UX implementation.",
-      technologies: ["HTML5", "CSS3", "JavaScript", "SCSS", "jQuery"],
+        "Profesyonel kariyerime responsive web siteleri geliştirerek başladım. Modern geliştirme pratiklerini öğrendim ve frontend geliştirme ile UI/UX implementasyonuna odaklandım.",
+      technologies: ["HTML5", "CSS3", "JavaScript", "SCSS", "jQuery", "Bootstrap"],
       achievements: [
-        "Created 20+ responsive websites",
-        "Improved code quality through peer reviews",
-        "Learned modern development workflows",
+        "20+ responsive web sitesi oluşturdum",
+        "Code review süreçleri ile kod kalitesini artırdım",
+        "Modern geliştirme workflow'larını öğrendim",
+        "SEO optimizasyonu ve performans iyileştirmeleri",
       ],
       icon: Users,
       gradient: "from-green-500 to-teal-500",
+      bgGradient: "from-green-500/10 to-teal-500/10",
     },
   ];
 
   return (
     <section
-      ref={sectionRef}
       id="experience"
-      className="py-20 bg-gradient-to-br from-indigo-50 via-purple-50 to-blue-50 relative overflow-hidden"
+      className="py-20 bg-gradient-to-br from-gray-900 via-slate-900 to-gray-900 relative overflow-hidden"
     >
       {/* Background elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-purple-300/15 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-300/15 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-indigo-300/10 rounded-full blur-3xl animate-pulse delay-500"></div>
+        <motion.div 
+          className="absolute top-20 left-20 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.6, 0.3]
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-20 right-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.4, 0.7, 0.4]
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
+        <motion.div 
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl"
+          animate={{
+            rotate: [0, 360],
+            scale: [1, 1.1, 1]
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
 
         {/* Floating particles */}
         {[...Array(10)].map((_, i) => (
-          <div
+          <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-purple-400/20 rounded-full animate-float"
+            className="absolute w-2 h-2 bg-purple-400/20 rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${3 + Math.random() * 4}s`,
+            }}
+            animate={{
+              y: [-20, 20, -20],
+              opacity: [0.2, 0.8, 0.2]
+            }}
+            transition={{
+              duration: 3 + Math.random() * 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: Math.random() * 5
             }}
           />
         ))}
@@ -115,20 +165,25 @@ export function Experience() {
       <div className="absolute inset-0 bg-[linear-gradient(rgba(99,102,241,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(99,102,241,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
 
       <div className="container mx-auto px-4 relative z-10">
-        <div
-          className={`transition-all duration-1000 ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-          }`}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
         >
           {/* Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Experience
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              My professional journey and the impact I've made along the way.
+          <motion.div className="text-center mb-16" variants={itemVariants}>
+            <motion.h2 
+              className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
+              Deneyimlerim
+            </motion.h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Profesyonel yolculuğum ve yol boyunca yarattığım etkiler.
             </p>
-          </div>
+          </motion.div>
 
           <div className="max-w-5xl mx-auto">
             <div className="relative">
@@ -136,124 +191,170 @@ export function Experience() {
               <div className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-400 via-blue-400 to-indigo-400 rounded-full hidden md:block opacity-30"></div>
 
               {experiences.map((exp, index) => (
-                <div key={index} className="relative mb-12 md:pl-20">
+                <motion.div 
+                  key={index} 
+                  className="relative mb-12 md:pl-20"
+                  variants={itemVariants}
+                >
                   {/* Timeline dot with gradient */}
-                  <div
-                    className={`absolute left-6 top-8 w-6 h-6 bg-gradient-to-r ${exp.gradient} rounded-full border-4 border-white shadow-lg hidden md:flex items-center justify-center`}
+                  <motion.div
+                    className={`absolute left-6 top-8 w-6 h-6 bg-gradient-to-r ${exp.gradient} rounded-full border-4 border-gray-900 shadow-lg hidden md:flex items-center justify-center`}
+                    whileHover={{ scale: 1.2 }}
+                    transition={{ duration: 0.3 }}
                   >
                     <exp.icon className="h-3 w-3 text-white" />
-                  </div>
+                  </motion.div>
 
-                  <Card className="bg-white/60 backdrop-blur-md border border-white/40 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:bg-white/70">
-                    <CardContent className="p-8">
-                      <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-6">
-                        <div className="mb-4 lg:mb-0 lg:flex-1">
-                          <h3 className="text-2xl font-bold text-gray-800 mb-2">
-                            {exp.position}
-                          </h3>
-                          <div className="flex items-center text-purple-600 mb-3 font-semibold">
-                            <Building className="h-5 w-5 mr-2" />
-                            <span>{exp.company}</span>
+                  <motion.div
+                    whileHover={{ 
+                      scale: 1.02,
+                      rotateY: 2,
+                      rotateX: 2
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Card className="bg-white/5 backdrop-blur-md border border-white/10 hover:border-white/20 transition-all duration-300 shadow-xl">
+                      <CardContent className="p-8">
+                        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-6">
+                          <div className="mb-4 lg:mb-0 lg:flex-1">
+                            <motion.h3 
+                              className="text-2xl font-bold text-white mb-2"
+                              whileHover={{ x: 5 }}
+                              transition={{ duration: 0.3 }}
+                            >
+                              {exp.position}
+                            </motion.h3>
+                            <motion.div 
+                              className="flex items-center text-purple-400 mb-3 font-semibold"
+                              whileHover={{ x: 5 }}
+                              transition={{ duration: 0.3 }}
+                            >
+                              <Building className="h-5 w-5 mr-2" />
+                              <span>{exp.company}</span>
+                            </motion.div>
+                          </div>
+
+                          <div className="lg:flex-shrink-0">
+                            <div className="flex flex-col space-y-2 text-sm text-gray-400">
+                              <motion.div 
+                                className="flex items-center bg-white/10 rounded-full px-3 py-1 backdrop-blur-sm"
+                                whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.15)" }}
+                              >
+                                <Calendar className="h-4 w-4 mr-2 text-blue-400" />
+                                <span className="font-medium">{exp.period}</span>
+                              </motion.div>
+                              <motion.div 
+                                className="flex items-center bg-white/10 rounded-full px-3 py-1 backdrop-blur-sm"
+                                whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.15)" }}
+                              >
+                                <MapPin className="h-4 w-4 mr-2 text-green-400" />
+                                <span className="font-medium">{exp.location}</span>
+                              </motion.div>
+                            </div>
                           </div>
                         </div>
 
-                        <div className="lg:flex-shrink-0">
-                          <div className="flex flex-col space-y-2 text-sm text-gray-600">
-                            <div className="flex items-center bg-white/50 rounded-full px-3 py-1">
-                              <Calendar className="h-4 w-4 mr-2 text-blue-500" />
-                              <span className="font-medium">{exp.period}</span>
-                            </div>
-                            <div className="flex items-center bg-white/50 rounded-full px-3 py-1">
-                              <MapPin className="h-4 w-4 mr-2 text-green-500" />
-                              <span className="font-medium">
-                                {exp.location}
-                              </span>
-                            </div>
+                        <p className="text-gray-300 mb-6 leading-relaxed text-lg">
+                          {exp.description}
+                        </p>
+
+                        <div className="mb-6">
+                          <motion.h4 
+                            className="font-semibold text-white mb-4 flex items-center"
+                            whileHover={{ x: 5 }}
+                          >
+                            <Award className="h-5 w-5 mr-2 text-yellow-400" />
+                            Temel Başarılar
+                          </motion.h4>
+                          <div className="grid md:grid-cols-2 gap-3">
+                            {exp.achievements.map((achievement, i) => (
+                              <motion.div
+                                key={i}
+                                className="flex items-start bg-white/5 rounded-lg p-3 border border-white/10"
+                                whileHover={{ 
+                                  backgroundColor: "rgba(255, 255, 255, 0.1)",
+                                  borderColor: "rgba(255, 255, 255, 0.2)",
+                                  x: 5
+                                }}
+                                transition={{ duration: 0.3 }}
+                              >
+                                <motion.div 
+                                  className={`w-2 h-2 bg-gradient-to-r ${exp.gradient} rounded-full mt-2 mr-3 flex-shrink-0`}
+                                  whileHover={{ scale: 1.5 }}
+                                />
+                                <span className="text-gray-300 text-sm">{achievement}</span>
+                              </motion.div>
+                            ))}
                           </div>
                         </div>
-                      </div>
 
-                      <p className="text-gray-600 mb-6 leading-relaxed text-lg">
-                        {exp.description}
-                      </p>
-
-                      <div className="mb-6">
-                        <h4 className="font-semibold text-gray-800 mb-4 flex items-center">
-                          <Award className="h-5 w-5 mr-2 text-yellow-500" />
-                          Key Achievements
-                        </h4>
-                        <div className="grid md:grid-cols-1 gap-2">
-                          {exp.achievements.map((achievement, i) => (
-                            <div
-                              key={i}
-                              className="flex items-start bg-white/50 rounded-lg p-3"
-                            >
-                              <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                              <span className="text-gray-600">
-                                {achievement}
-                              </span>
-                            </div>
-                          ))}
+                        <div className="space-y-3">
+                          <motion.h4 
+                            className="font-semibold text-white flex items-center"
+                            whileHover={{ x: 5 }}
+                          >
+                            <Code2 className="h-5 w-5 mr-2 text-blue-400" />
+                            Kullanılan Teknolojiler:
+                          </motion.h4>
+                          <div className="flex flex-wrap gap-2">
+                            {exp.technologies.map((tech, i) => (
+                              <motion.div
+                                key={tech}
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: i * 0.1 }}
+                                whileHover={{ scale: 1.05 }}
+                              >
+                                <Badge className={`px-3 py-1 bg-gradient-to-r ${exp.bgGradient} text-white border border-white/20 hover:border-white/40 transition-all duration-200`}>
+                                  {tech}
+                                </Badge>
+                              </motion.div>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-
-                      <div className="space-y-3">
-                        <h4 className="font-semibold text-gray-800">
-                          Technologies Used:
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          {exp.technologies.map((tech) => (
-                            <Badge
-                              key={tech}
-                              className="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-700 border border-purple-200 hover:from-purple-200 hover:to-blue-200 transition-all duration-200"
-                            >
-                              {tech}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </motion.div>
               ))}
             </div>
           </div>
 
           {/* Summary card */}
-          <div className="max-w-4xl mx-auto mt-16">
-            <div className="bg-gradient-to-r from-purple-500/10 to-blue-500/10 backdrop-blur-md rounded-2xl p-8 border border-white/40">
+          <motion.div 
+            className="max-w-4xl mx-auto mt-16"
+            variants={itemVariants}
+          >
+            <motion.div 
+              className="bg-gradient-to-r from-purple-500/10 to-blue-500/10 backdrop-blur-md rounded-2xl p-8 border border-white/10"
+              whileHover={{ 
+                backgroundColor: "rgba(99, 102, 241, 0.1)",
+                borderColor: "rgba(99, 102, 241, 0.3)"
+              }}
+              transition={{ duration: 0.3 }}
+            >
               <div className="text-center">
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                  Professional Growth
+                <motion.div
+                  className="flex justify-center mb-4"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <Target className="h-8 w-8 text-blue-400" />
+                </motion.div>
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  Profesyonel Gelişim
                 </h3>
-                <p className="text-gray-600 leading-relaxed max-w-2xl mx-auto">
-                  Throughout my career, I've consistently grown from a junior
-                  developer to a senior role, always focusing on learning new
-                  technologies, improving code quality, and delivering
-                  exceptional results. My journey reflects a commitment to
-                  excellence and continuous improvement.
+                <p className="text-gray-300 leading-relaxed max-w-2xl mx-auto">
+                  Kariyerim boyunca junior geliştiriciden senior role'e kadar sürekli büyüdüm. 
+                  Her zaman yeni teknolojiler öğrenmeye, kod kalitesini artırmaya ve 
+                  olağanüstü sonuçlar vermeye odaklandım. Yolculuğum mükemmellik ve 
+                  sürekli gelişim taahhüdümü yansıtıyor.
                 </p>
               </div>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </div>
-
-      <style jsx>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-20px);
-          }
-        }
-
-        .animate-float {
-          animation: float 4s ease-in-out infinite;
-        }
-      `}</style>
     </section>
   );
 }

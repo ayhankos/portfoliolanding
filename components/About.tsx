@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -12,99 +12,135 @@ import {
   Award,
   Target,
   Lightbulb,
+  Brain,
+  Rocket,
 } from "lucide-react";
 
 export function About() {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        staggerChildren: 0.1
+      }
     }
+  };
 
-    return () => observer.disconnect();
-  }, []);
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
 
   const highlights = [
     {
       icon: Code,
       title: "Full Stack Development",
-      description: "End-to-end web solutions with modern technologies",
-      color: "blue",
+      description: "Modern teknolojilerle end-to-end web çözümleri",
+      color: "from-blue-500 to-cyan-500",
+      bgColor: "bg-blue-500/10",
     },
     {
       icon: Palette,
       title: "UI/UX Design",
-      description: "Creating beautiful and intuitive user experiences",
-      color: "purple",
+      description: "Kullanıcı odaklı, estetik ve fonksiyonel tasarımlar",
+      color: "from-purple-500 to-pink-500",
+      bgColor: "bg-purple-500/10",
     },
     {
       icon: Zap,
       title: "Performance Optimization",
-      description: "Building fast, scalable, and efficient applications",
-      color: "yellow",
+      description: "Hızlı, ölçeklenebilir ve verimli uygulamalar",
+      color: "from-yellow-500 to-orange-500",
+      bgColor: "bg-yellow-500/10",
     },
     {
       icon: Users,
       title: "Team Collaboration",
-      description: "Working effectively with cross-functional teams",
-      color: "green",
+      description: "Agile metodoloji ile etkili takım çalışması",
+      color: "from-green-500 to-emerald-500",
+      bgColor: "bg-green-500/10",
     },
   ];
 
   const stats = [
-    { icon: Star, number: "5+", label: "Years Experience" },
-    { icon: Award, number: "50+", label: "Projects Completed" },
-    { icon: Target, number: "98%", label: "Client Satisfaction" },
-    { icon: Lightbulb, number: "24/7", label: "Learning Mode" },
+    { icon: Star, number: "3+", label: "Yıl Deneyim", color: "text-yellow-400" },
+    { icon: Award, number: "25+", label: "Tamamlanan Proje", color: "text-blue-400" },
+    { icon: Target, number: "100%", label: "Müşteri Memnuniyeti", color: "text-green-400" },
+    { icon: Lightbulb, number: "∞", label: "Öğrenme Modu", color: "text-purple-400" },
   ];
 
   const technologies = [
-    "React",
-    "Next.js",
-    "TypeScript",
-    "Node.js",
-    "PostgreSQL",
-    "AWS",
-    "Docker",
-    "GraphQL",
-    "Python",
-    "MongoDB",
-    "Redis",
-    "Kubernetes",
+    { name: "React", category: "Frontend" },
+    { name: "Next.js", category: "Framework" },
+    { name: "TypeScript", category: "Language" },
+    { name: "Node.js", category: "Backend" },
+    { name: "PostgreSQL", category: "Database" },
+    { name: "MongoDB", category: "Database" },
+    { name: "AWS", category: "Cloud" },
+    { name: "Docker", category: "DevOps" },
+    { name: "GraphQL", category: "API" },
+    { name: "Redis", category: "Cache" },
+    { name: "Tailwind CSS", category: "Styling" },
+    { name: "Prisma", category: "ORM" },
   ];
 
   return (
     <section
-      ref={sectionRef}
       id="about"
-      className="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 relative overflow-hidden"
+      className="py-20 bg-gradient-to-br from-slate-900 via-gray-900 to-slate-900 relative overflow-hidden"
     >
-      {/* Background elements */}
+      {/* Animated background elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-40 left-20 w-64 h-64 bg-blue-300/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-40 right-20 w-80 h-80 bg-purple-300/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <motion.div 
+          className="absolute top-40 left-20 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.6, 0.3]
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-40 right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.4, 0.7, 0.4]
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
 
         {/* Floating particles */}
         {[...Array(8)].map((_, i) => (
-          <div
+          <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-blue-400/20 rounded-full animate-float"
+            className="absolute w-2 h-2 bg-blue-400/20 rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${3 + Math.random() * 4}s`,
+            }}
+            animate={{
+              y: [-20, 20, -20],
+              opacity: [0.2, 0.8, 0.2]
+            }}
+            transition={{
+              duration: 3 + Math.random() * 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: Math.random() * 5
             }}
           />
         ))}
@@ -114,143 +150,176 @@ export function About() {
       <div className="absolute inset-0 bg-[linear-gradient(rgba(99,102,241,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(99,102,241,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
 
       <div className="container mx-auto px-4 relative z-10">
-        <div
-          className={`transition-all duration-1000 ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-          }`}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
         >
           {/* Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-              About Me
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              A passionate developer with over 5 years of experience creating
-              digital solutions that make a difference.
+          <motion.div className="text-center mb-16" variants={itemVariants}>
+            <motion.h2 
+              className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
+              Hakkımda
+            </motion.h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Teknoloji tutkusu ile modern web çözümleri geliştiren, 
+              sürekli öğrenmeye odaklı bir yazılım geliştirici.
             </p>
-          </div>
+          </motion.div>
 
           {/* Stats Cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+          <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16" variants={itemVariants}>
             {stats.map((stat, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-white/60 backdrop-blur-md rounded-xl p-6 border border-white/40 shadow-lg text-center transform hover:scale-105 transition-all duration-300"
+                className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 shadow-lg text-center group"
+                whileHover={{ 
+                  scale: 1.05, 
+                  backgroundColor: "rgba(255, 255, 255, 0.1)",
+                  borderColor: "rgba(255, 255, 255, 0.2)"
+                }}
+                transition={{ duration: 0.3 }}
               >
-                <stat.icon className="h-8 w-8 text-blue-600 mx-auto mb-3" />
-                <div className="text-2xl font-bold text-gray-800 mb-1">
+                <motion.div
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <stat.icon className={`h-8 w-8 ${stat.color} mx-auto mb-3`} />
+                </motion.div>
+                <motion.div 
+                  className="text-2xl font-bold text-white mb-1"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  transition={{ delay: 0.2 + index * 0.1, type: "spring" }}
+                >
                   {stat.number}
-                </div>
-                <div className="text-sm text-gray-600">{stat.label}</div>
-              </div>
+                </motion.div>
+                <div className="text-sm text-gray-400">{stat.label}</div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Main Content */}
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
             {/* Left side - Story */}
-            <div className="order-2 lg:order-1">
-              <div className="bg-white/60 backdrop-blur-md rounded-2xl p-8 border border-white/40 shadow-xl">
-                <h3 className="text-2xl font-semibold mb-6 text-gray-800">
-                  My Story
-                </h3>
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  I started my journey in web development with a simple
-                  curiosity about how websites work. Over the years, this
-                  curiosity evolved into a passion for creating exceptional
-                  digital experiences that solve real-world problems.
-                </p>
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  My approach combines technical expertise with creative
-                  problem-solving, always focusing on user experience and
-                  performance. I believe in clean code, scalable architecture,
-                  and continuous learning.
-                </p>
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  When I'm not coding, you'll find me exploring new
-                  technologies, contributing to open source projects, or
-                  mentoring fellow developers. I'm always excited to take on new
-                  challenges and collaborate on innovative projects.
-                </p>
+            <motion.div variants={itemVariants}>
+              <div className="bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10 shadow-xl">
+                <motion.div
+                  className="flex items-center mb-6"
+                  whileHover={{ x: 10 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Brain className="h-8 w-8 text-blue-400 mr-3" />
+                  <h3 className="text-2xl font-semibold text-white">Hikayem</h3>
+                </motion.div>
+                
+                <div className="space-y-4 text-gray-300 leading-relaxed">
+                  <p>
+                    Web geliştirme yolculuğuma merak ile başladım. Zamanla bu merak, 
+                    gerçek dünya problemlerini çözen dijital deneyimler yaratma tutkusuna dönüştü.
+                  </p>
+                  <p>
+                    Teknik uzmanlığı yaratıcı problem çözme ile birleştiren yaklaşımım, 
+                    her zaman kullanıcı deneyimini ve performansı ön planda tutar.
+                  </p>
+                  <p>
+                    Kod yazmadığım zamanlarda yeni teknolojileri keşfediyor, 
+                    açık kaynak projelere katkıda bulunuyor ve diğer geliştiricilere mentorluk yapıyorum.
+                  </p>
+                </div>
 
                 {/* Technologies */}
-                <div className="space-y-3">
-                  <h4 className="font-semibold text-gray-800">
-                    Technologies I work with:
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {technologies.map((tech) => (
-                      <Badge
-                        key={tech}
-                        className="px-3 py-1 bg-blue-100 text-blue-700 border border-blue-200 hover:bg-blue-200 transition-colors duration-200"
+                <div className="mt-8">
+                  <motion.h4 
+                    className="font-semibold text-white mb-4 flex items-center"
+                    whileHover={{ x: 5 }}
+                  >
+                    <Rocket className="h-5 w-5 mr-2 text-purple-400" />
+                    Teknoloji Yığınım:
+                  </motion.h4>
+                  <div className="grid grid-cols-2 gap-2">
+                    {technologies.map((tech, index) => (
+                      <motion.div
+                        key={tech.name}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: index * 0.05 }}
+                        whileHover={{ scale: 1.05 }}
                       >
-                        {tech}
-                      </Badge>
+                        <Badge className="w-full justify-center px-3 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 border border-blue-400/30 hover:from-blue-500/30 hover:to-purple-500/30 transition-all duration-200">
+                          <span className="font-medium">{tech.name}</span>
+                          <span className="ml-2 text-xs opacity-70">{tech.category}</span>
+                        </Badge>
+                      </motion.div>
                     ))}
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right side - Highlights */}
-            <div className="order-1 lg:order-2">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <motion.div variants={itemVariants}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 {highlights.map((highlight, index) => (
-                  <Card
+                  <motion.div
                     key={index}
-                    className="bg-white/60 backdrop-blur-md border border-white/40 hover:shadow-xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+                    whileHover={{ 
+                      scale: 1.05, 
+                      rotateY: 5,
+                      rotateX: 5 
+                    }}
+                    transition={{ duration: 0.3 }}
                   >
-                    <CardContent className="p-6 text-center">
-                      <div
-                        className={`w-12 h-12 rounded-full bg-${highlight.color}-100 flex items-center justify-center mx-auto mb-4 border border-${highlight.color}-200`}
-                      >
-                        <highlight.icon
-                          className={`h-6 w-6 text-${highlight.color}-600`}
-                        />
-                      </div>
-                      <h4 className="font-semibold text-gray-800 mb-2 text-sm">
-                        {highlight.title}
-                      </h4>
-                      <p className="text-xs text-gray-600 leading-relaxed">
-                        {highlight.description}
-                      </p>
-                    </CardContent>
-                  </Card>
+                    <Card className="bg-white/5 backdrop-blur-md border border-white/10 hover:border-white/20 transition-all duration-300 h-full">
+                      <CardContent className="p-6 text-center h-full flex flex-col">
+                        <motion.div
+                          className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${highlight.color} ${highlight.bgColor} flex items-center justify-center mx-auto mb-4 border border-white/20`}
+                          whileHover={{ rotate: 360 }}
+                          transition={{ duration: 0.6 }}
+                        >
+                          <highlight.icon className="h-8 w-8 text-white" />
+                        </motion.div>
+                        <h4 className="font-semibold text-white mb-3 text-lg">
+                          {highlight.title}
+                        </h4>
+                        <p className="text-sm text-gray-400 leading-relaxed flex-grow">
+                          {highlight.description}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
                 ))}
               </div>
 
-              {/* Additional info card */}
-              <div className="mt-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-md rounded-xl p-6 border border-white/40">
-                <h4 className="font-semibold text-gray-800 mb-3 flex items-center">
-                  <Target className="h-5 w-5 text-blue-600 mr-2" />
-                  Current Focus
-                </h4>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Currently focusing on cloud-native applications, microservices
-                  architecture, and AI-powered web solutions. Always exploring
-                  the latest in web3 and blockchain technologies.
+              {/* Current Focus */}
+              <motion.div 
+                className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-md rounded-xl p-6 border border-white/10"
+                whileHover={{ 
+                  backgroundColor: "rgba(99, 102, 241, 0.1)",
+                  borderColor: "rgba(99, 102, 241, 0.3)"
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.h4 
+                  className="font-semibold text-white mb-3 flex items-center"
+                  whileHover={{ x: 5 }}
+                >
+                  <Target className="h-5 w-5 text-blue-400 mr-2" />
+                  Şu Anki Odağım
+                </motion.h4>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  Cloud-native uygulamalar, mikroservis mimarisi ve AI destekli web çözümleri 
+                  üzerinde çalışıyorum. Web3 ve blockchain teknolojilerini de aktif olarak araştırıyorum.
                 </p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
-
-      <style jsx>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-20px);
-          }
-        }
-
-        .animate-float {
-          animation: float 4s ease-in-out infinite;
-        }
-      `}</style>
     </section>
   );
 }
