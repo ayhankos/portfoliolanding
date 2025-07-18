@@ -93,7 +93,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="py-20 bg-gradient-to-br from-gray-900 via-slate-900 to-gray-900 relative overflow-hidden"
+      className="py-10 bg-gradient-to-br from-gray-900 via-slate-900 to-gray-900 relative overflow-hidden"
     >
       {/* Background elements */}
       <div className="absolute inset-0">
